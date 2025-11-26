@@ -8,6 +8,7 @@ endif()
 # find dependencies
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
+find_package(sensor_msgs REQUIRED)
 find_package(orocos_kdl REQUIRED)
 find_package(kdl_parser REQUIRED)
 find_package(urdf REQUIRED)
@@ -15,23 +16,32 @@ find_package(urdf REQUIRED)
 
 
 add_executable(gravity_comp src/gravity_comp.cpp)
-
-
 ament_target_dependencies(gravity_comp
   kdl_parser
   urdf
+  orocos_kdl)
+target_link_libraries(gravity_comp 
+  orocos-kdl
+  )
+
+add_executable(gravity_comp_test src/gravity_comp_test.cpp)
+ament_target_dependencies(gravity_comp_test
+  kdl_parser
+  urdf
   orocos_kdl
+  rclcpp
+  sensor_msgs
 )
 
-target_link_libraries(gravity_comp 
+target_link_libraries(gravity_comp_test 
   orocos-kdl
   )
 
 include_directories(include)
 install(TARGETS
   gravity_comp
+  gravity_comp_test
   DESTINATION lib/${PROJECT_NAME}
 )
-
 
 ament_package()

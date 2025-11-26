@@ -8,7 +8,7 @@
 
 int main() {
     // Load URDF from file
-    std::ifstream urdf_file("/home/scg/Documents/surya_ws/src/robot_description/urdf/dual_arm.urdf");
+    std::ifstream urdf_file("/home/cstar/Documents/dual_arm_ws/src/robot_description/urdf/darm_with_gripper.urdf");
     std::string urdf_string((std::istreambuf_iterator<char>(urdf_file)),
                              std::istreambuf_iterator<char>());
 
